@@ -13,10 +13,11 @@ __status__ = "Development"
 
 '''
 This file contains class "StatFinCrawler".
-This class can be used to navigate through Statistics Finland's database directories and acquire data.
+This class can be used to navigate through Statistics Finland's (Tilastokeskus) database directories and 
+acquire data for further processing or analyzing with Python.
 
 
-To be implemented:
+To be implemented (with no deadline):
 Search tables using given keywords
 Crawl through the databases automatically and orderly
 Download the data to csv-file
@@ -25,13 +26,12 @@ More support for customized variables.
 '''
 
 
-#Modules:
-## Dependencies ##
+#External packages:
 try:
         import pandas as pd
         _PANDAS_IMPORTED = True
 except ImportError:
-        TilastokeskusCrawler.output = 'csv'
+        StatFinCrawler.output = 'csv'
         ImportWarning("Pandas is not installed. Pandas' dataframes cannot be used. \nStatFinCrawler.set_output_format(output_format='nested list'")
         _PANDAS_IMPORTED = False
 import requests
@@ -50,13 +50,8 @@ import csv
 
 
 
-
-
-
-
-
 class StatFinCrawler:
-        #Format of the API: PXWEB/API-NAME/API-VERSION/LANGUAGE/DATABASE-ID/LEVELS/TABLE-ID
+        #Format of the API: PXWEB/{API-NAME}/{API-VERSION}/{LANGUAGE}/{DATABASE-ID}/{LEVELS}/{TABLE-ID}
         base_url = 'http://pxnet2.stat.fi/PXWeb/api/v1/en/StatFin'
         speed = 2
         output = 'pandas'
@@ -87,6 +82,7 @@ class StatFinCrawler:
                 setattr(self, variable, value_list)
         
         def to_start(self):
+                "Sets the crawler to the root of the StatFin's API"
                 self.go_next(command='start')
 
 
@@ -113,12 +109,6 @@ class StatFinCrawler:
                         print(err)
                         return None
                 return dataframe
-
-        def walk_orderly(self):
-                "To be implemented"
-                #Mene tietokantaa järjestyksessä läpi lataillen aineistoa.
-                while not self.last_page:
-                        pass
                 
         def walk_to(self, path, **kwargs):
                 self.URL = path
@@ -388,12 +378,5 @@ if __name__ == "__main__":
         input("Press enter to quit.")
         print("END OF PROGRAM")
         
-
-
-
-
-
-
-
 
 #EOF
