@@ -2,7 +2,7 @@
 
 
 __author__ = "Mikael Koli"
-__copyright__ = "Copyright 2018, Automatisoitu Analyysi -Projekti"
+__copyright__ = "Copyright 2018"
 __credits__ = [" "]
 __license__ = "MIT License"
 __version__ = "0.9.3"
