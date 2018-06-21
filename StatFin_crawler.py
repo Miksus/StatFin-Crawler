@@ -76,10 +76,7 @@ class StatFinCrawler:
                         "Range is in datetime. TO BE IMPLEMENTED"
                         self.daterange['year'] = tuple(range(start_date, end_date))
                         self.daterange['date'] = None
-                        
-                        
-        def set_variable(self, variable, value_llist):
-                setattr(self, variable, value_list)
+
         
         def to_start(self):
                 "Sets the crawler to the root of the StatFin's API"
